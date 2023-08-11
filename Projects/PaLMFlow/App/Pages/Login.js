@@ -96,6 +96,30 @@ export default function Login() {
             </Text>
           </View>
         </LinearGradient>
+
+        {/* Add these two View components to create the bubble shapes */}
+        <View
+          style={{
+            position: "absolute",
+            bottom: -70,
+            left: -20,
+            width: 120,
+            height: 120,
+            backgroundColor: "#d3e3fc",
+            borderRadius: 80,
+          }}
+        />
+        <View
+          style={{
+            position: "absolute",
+            bottom: -40,
+            right: -50,
+            width: 180,
+            height: 180,
+            backgroundColor: "rgba(211, 227, 252, 0.6)",
+            borderRadius: 90,
+          }}
+        />
       </View>
     </View>
   );
