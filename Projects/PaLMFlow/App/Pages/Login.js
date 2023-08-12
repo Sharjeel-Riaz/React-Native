@@ -1,10 +1,21 @@
 import React from "react";
-import { View, Text, Image, Dimensions, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import * as WebBrowser from "expo-web-browser";
+import * as Google from "expo-auth-session/providers/google";
 import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 
 const screenWidth = Dimensions.get("window").width;
 const bannerImageHeight = Dimensions.get("window").height / 3.2;
+
+WebBrowser.maybeCompleteAuthSession();
 
 const styles = StyleSheet.create({
   container: {
@@ -47,6 +58,10 @@ const styles = StyleSheet.create({
 });
 
 export default function Login() {
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    androidClientId: process.env.ANDROID_CLIENT_ID,
+  });
+
   return (
     <View style={styles.container}>
       <Image
@@ -63,7 +78,6 @@ export default function Login() {
             textAlign: "center",
             marginTop: 80,
             fontSize: 25,
-            fontWeight: "bold",
             fontFamily: "sans-serif",
           }}
         >
@@ -76,7 +90,7 @@ export default function Login() {
           end={{ x: 1, y: 0 }}
           style={styles.gradientContainer}
         >
-          <View style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => promptAsync()}>
             <AntDesign
               name="google"
               size={25}
@@ -94,10 +108,9 @@ export default function Login() {
             >
               Continue with Google
             </Text>
-          </View>
+          </TouchableOpacity>
         </LinearGradient>
 
-        {/* Add these two View components to create the bubble shapes */}
         <View
           style={{
             position: "absolute",
