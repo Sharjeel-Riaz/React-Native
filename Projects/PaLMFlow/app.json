@@ -3,7 +3,6 @@
     "name": "PaLMFlow",
     "slug": "PaLMFlow",
     "version": "1.0.0",
-    "scheme": "PaLMFlow",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -32,6 +31,7 @@
       "eas": {
         "projectId": "6cd20da6-0cf6-40b2-aa7f-0133f15e1a6f"
       }
-    }
+    },
+    "scheme": "PaLMFlow"
   }
 }

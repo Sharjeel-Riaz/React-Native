@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
 
 export default function Login() {
   const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId: process.env.ANDROID_CLIENT_ID,
+    androidClientId: process.env.EXPO_PUBLIC_ANDROID_CLIENT_ID,
   });
 
   return (
