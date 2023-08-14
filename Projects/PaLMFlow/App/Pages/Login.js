@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import AuthContext from "../Context/AuthContext";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 import { AntDesign } from "@expo/vector-icons";
@@ -15,10 +16,11 @@ import { LinearGradient } from "expo-linear-gradient";
 const screenWidth = Dimensions.get("window").width;
 const bannerImageHeight = Dimensions.get("window").height / 3.2;
 
-WebBrowser.maybeCompleteAuthSession();
-
 export default function Login() {
+  WebBrowser.maybeCompleteAuthSession();
+
   const [userInfo, setUserInfo] = useState();
+  const [userData, setUserData] = useContext(AuthContext);
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId: process.env.EXPO_PUBLIC_ANDROID_CLIENT_ID,
   });
@@ -42,6 +44,7 @@ export default function Login() {
       const user = await resp.json();
       console.log("User Details", user);
       setUserInfo(userInfo);
+      setUserData(userData);
     } catch (error) {
       console.log(error);
     }
