@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -17,55 +17,35 @@ const bannerImageHeight = Dimensions.get("window").height / 3.2;
 
 WebBrowser.maybeCompleteAuthSession();
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  bannerImage: {
-    width: screenWidth,
-    height: bannerImageHeight,
-  },
-  containerRound: {
-    height:
-      Dimensions.get("window").height -
-      (bannerImageHeight - Dimensions.get("window").height * 0.04),
-    width: screenWidth,
-    paddingTop: 30,
-    marginTop: -35,
-    backgroundColor: "#FFF",
-    borderTopRightRadius: 45,
-    borderTopLeftRadius: 45,
-    elevation: 20,
-  },
-  gradientContainer: {
-    padding: 15,
-    margin: 65,
-    marginTop: 30,
-    borderRadius: 20,
-    elevation: 5,
-  },
-  logoImage: {
-    width: 275,
-    height: 60,
-    margin: 40,
-    marginBottom: 60,
-    alignSelf: "center",
-  },
-  button: {
-    backgroundColor: "transparent",
-    justifyContent: "center",
-    fontFamily: "sans-serif",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-});
-
 export default function Login() {
+  const [userInfo, setUserInfo] = useState();
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId: process.env.EXPO_PUBLIC_ANDROID_CLIENT_ID,
   });
+
+  // To handle response from authentication
+  useEffect(() => {
+    if (response?.type == "success") {
+      getUserData();
+    }
+  }, [response]);
+
+  // To get user data
+  const getUserData = async () => {
+    try {
+      const resp = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+        headers: {
+          Authorization: `Bearer ${response.authentication.accessToken}`,
+        },
+      });
+
+      const user = await resp.json();
+      console.log("User Details", user);
+      setUserInfo(userInfo);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -142,3 +122,49 @@ export default function Login() {
     </View>
   );
 }
+
+// Styles
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  bannerImage: {
+    width: screenWidth,
+    height: bannerImageHeight,
+  },
+  containerRound: {
+    height:
+      Dimensions.get("window").height -
+      (bannerImageHeight - Dimensions.get("window").height * 0.04),
+    width: screenWidth,
+    paddingTop: 30,
+    marginTop: -35,
+    backgroundColor: "#FFF",
+    borderTopRightRadius: 45,
+    borderTopLeftRadius: 45,
+    elevation: 20,
+  },
+  gradientContainer: {
+    padding: 15,
+    margin: 65,
+    marginTop: 30,
+    borderRadius: 20,
+    elevation: 5,
+  },
+  logoImage: {
+    width: 275,
+    height: 60,
+    margin: 40,
+    marginBottom: 60,
+    alignSelf: "center",
+  },
+  button: {
+    backgroundColor: "transparent",
+    justifyContent: "center",
+    fontFamily: "sans-serif",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+});
