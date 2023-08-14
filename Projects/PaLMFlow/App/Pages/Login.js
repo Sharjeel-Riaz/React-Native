@@ -27,25 +27,30 @@ const styles = StyleSheet.create({
     height: bannerImageHeight,
   },
   containerRound: {
-    height: Dimensions.get("window").height - (bannerImageHeight - 20),
+    height:
+      Dimensions.get("window").height -
+      (bannerImageHeight - Dimensions.get("window").height * 0.04),
+    width: screenWidth,
     paddingTop: 30,
-    marginTop: -20,
+    marginTop: -35,
     backgroundColor: "#FFF",
-    borderTopRightRadius: 50,
-    borderTopLeftRadius: 50,
+    borderTopRightRadius: 45,
+    borderTopLeftRadius: 45,
     elevation: 20,
   },
   gradientContainer: {
-    padding: 20,
-    margin: 50,
+    padding: 15,
+    margin: 65,
     marginTop: 30,
     borderRadius: 20,
     elevation: 5,
   },
   logoImage: {
-    width: 350,
-    height: 80,
+    width: 275,
+    height: 60,
     margin: 40,
+    marginBottom: 60,
+    alignSelf: "center",
   },
   button: {
     backgroundColor: "transparent",
@@ -77,7 +82,7 @@ export default function Login() {
           style={{
             textAlign: "center",
             marginTop: 80,
-            fontSize: 25,
+            fontSize: 22,
             fontFamily: "sans-serif",
           }}
         >
@@ -93,7 +98,7 @@ export default function Login() {
           <TouchableOpacity style={styles.button} onPress={() => promptAsync()}>
             <AntDesign
               name="google"
-              size={25}
+              size={24}
               color="white"
               style={{
                 marginRight: 12,
@@ -101,7 +106,7 @@ export default function Login() {
             />
             <Text
               style={{
-                fontSize: 25,
+                fontSize: 22,
                 fontWeight: "bold",
                 color: "#FFF",
               }}
