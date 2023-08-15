@@ -5,7 +5,7 @@ import Login from "./App/Pages/Login";
 import HomeScreen from "./App/Pages/HomeScreen";
 
 export default function App() {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
     // To handle side effects
@@ -18,7 +18,6 @@ export default function App() {
       </AuthContext.Provider> */}
 
       <HomeScreen />
-      {/* <Login /> */}
     </View>
   );
 }

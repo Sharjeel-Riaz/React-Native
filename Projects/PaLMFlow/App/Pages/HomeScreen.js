@@ -41,14 +41,16 @@ export default function HomeScreen() {
       >
         I am {selectedChatFaceData.name}.{" "}
       </Text>
-      <Image
-        source={{ uri: selectedChatFaceData.image }}
-        style={{
-          width: 150,
-          height: 150,
-          marginTop: 25,
-        }}
-      />
+      {selectedChatFaceData.image && (
+        <Image
+          source={{ uri: selectedChatFaceData.image }}
+          style={{
+            width: 150,
+            height: 150,
+            marginTop: 25,
+          }}
+        />
+      )}
       <Text
         style={{
           fontSize: 30,
