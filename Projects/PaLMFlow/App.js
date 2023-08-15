@@ -13,9 +13,12 @@ export default function App() {
 
   return (
     <View>
-      <AuthContext.Provider value={{ userData, setUserData }}>
+      {/* <AuthContext.Provider value={{ userData, setUserData }}>
         {userData ? <HomeScreen /> : <Login />}
-      </AuthContext.Provider>
+      </AuthContext.Provider> */}
+
+      <HomeScreen />
+      {/* <Login /> */}
     </View>
   );
 }

@@ -20,7 +20,8 @@ export default function Login() {
   WebBrowser.maybeCompleteAuthSession();
 
   const [userInfo, setUserInfo] = useState();
-  const [userData, setUserData] = useContext(AuthContext);
+  // This right below is the one causing bug
+  // const [userData, setUserData] = useContext(AuthContext);
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId: process.env.EXPO_PUBLIC_ANDROID_CLIENT_ID,
   });
