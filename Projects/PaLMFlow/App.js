@@ -3,9 +3,10 @@ import { View } from "react-native";
 import AuthContext from "./App/Context/AuthContext";
 import Login from "./App/Pages/Login";
 import HomeScreen from "./App/Pages/HomeScreen";
+import Home from "./App/Pages/Home";
 
 export default function App() {
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState();
 
   useEffect(() => {
     // To handle side effects
@@ -13,11 +14,9 @@ export default function App() {
 
   return (
     <View>
-      {/* <AuthContext.Provider value={{ userData, setUserData }}>
+      <AuthContext.Provider value={{ userData, setUserData }}>
         {userData ? <HomeScreen /> : <Login />}
-      </AuthContext.Provider> */}
-
-      <HomeScreen />
+      </AuthContext.Provider>
     </View>
   );
 }
