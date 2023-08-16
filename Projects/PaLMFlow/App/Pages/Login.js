@@ -12,6 +12,7 @@ import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 import { AntDesign } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import Services from "../Shared/Services";
 
 const screenWidth = Dimensions.get("window").width;
 const bannerImageHeight = Dimensions.get("window").height / 3.2;
@@ -25,7 +26,7 @@ export default function Login() {
     androidClientId: process.env.EXPO_PUBLIC_ANDROID_CLIENT_ID,
   });
 
-  // To handle response from authentication
+  // To handle respon se from authentication
   useEffect(() => {
     if (response?.type == "success") {
       getUserData();
@@ -42,11 +43,11 @@ export default function Login() {
       });
 
       const user = await resp.json();
-      console.log("User Details", user);
       setUserInfo(user);
       setUserData(user);
+      await Services.setUserAuth(user); // Setting the data in local storage
     } catch (error) {
-      console.log(error);
+      console.log("ERROR: ", error);
     }
   };
 
