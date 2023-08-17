@@ -45,7 +45,7 @@ export default function Login() {
       const user = await resp.json();
       setUserInfo(user);
       setUserData(user);
-      await Services.setUserAuth(user); // Setting the data in local storage
+      await Services.setUserAuth(user); // Storing the data in local storage
     } catch (error) {
       console.log("ERROR: ", error);
     }
