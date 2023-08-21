@@ -9,10 +9,11 @@ import {
   Button,
 } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
-// import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
 import ChatFaceData from "../Services/ChatFaceData";
 import Services from "../Shared/Services";
 import AuthContext from "../Context/AuthContext";
+import { useNavigation } from "@react-navigation/native";
+// import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
 
 export default function HomeScreen() {
   //   let [fontsLoaded, fontError] = useFonts({
@@ -22,6 +23,7 @@ export default function HomeScreen() {
   const [chatFaceData, setChatFaceData] = useState([]);
   const [selectedChatFaceData, setSelectedChatFaceData] = useState([]);
   const { userData, setUserData } = useContext(AuthContext);
+  const navigation = useNavigation();
 
   useEffect(() => {
     setChatFaceData(ChatFaceData);
@@ -197,6 +199,7 @@ export default function HomeScreen() {
           ]}
           onPress={() => {
             console.log("Clicked");
+            navigation.navigate("chat");
           }}
         >
           <Text

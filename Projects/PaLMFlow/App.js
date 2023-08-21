@@ -3,7 +3,8 @@ import { View } from "react-native";
 import AuthContext from "./App/Context/AuthContext";
 import Services from "./App/Shared/Services";
 import Login from "./App/Pages/Login";
-import HomeScreen from "./App/Pages/HomeScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import HomeScreenNavigation from "./App/Navigation/HomeScreenNavigation";
 
 export default function App() {
   const [userData, setUserData] = useState();
@@ -19,9 +20,15 @@ export default function App() {
   }, []);
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <AuthContext.Provider value={{ userData, setUserData }}>
-        {userData ? <HomeScreen /> : <Login />}
+        {userData ? (
+          <NavigationContainer>
+            <HomeScreenNavigation />
+          </NavigationContainer>
+        ) : (
+          <Login />
+        )}
       </AuthContext.Provider>
     </View>
   );
