@@ -1,5 +1,4 @@
-import { Text, View } from "react-native";
-import React, { Component } from "react";
+import React from "react";
 import HomeScreen from "../Pages/HomeScreen";
 import ChatScreen from "../Pages/ChatScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
