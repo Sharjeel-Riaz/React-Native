@@ -198,8 +198,7 @@ export default function HomeScreen() {
             },
           ]}
           onPress={() => {
-            console.log("Clicked");
-            navigation.navigate("chat");
+            navigation.navigate("chat", {selectedFace:selectedChatFaceData});
           }}
         >
           <Text
