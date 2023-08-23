@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { View } from "react-native";
+import { View, TouchableOpacity, Image } from "react-native";
 import { StyleSheet } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { GiftedChat, InputToolbar } from "react-native-gifted-chat";
 import GlobalApi from "../Services/GlobalApi";
 
@@ -9,6 +10,7 @@ export default function ChatScreen() {
   const param = useRoute().params;
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
     setMessages([
@@ -81,6 +83,19 @@ export default function ChatScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#FFF" }}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("home");
+        }}
+      >
+        <Image
+          source={require("../Assets/back-btn.png")}
+          style={{
+            margin: 10,
+            marginTop: 20,
+          }}
+        />
+      </TouchableOpacity>
       <GiftedChat
         renderInputToolbar={renderInputToolbar}
         messages={messages}
@@ -100,9 +115,8 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: "#f0f0f0",
     borderColor: "transparent",
-    marginLeft: 8,
-    marginRight: 8,
-    marginBottom: 8,
-    elevation: 1,
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 3,
   },
 });
