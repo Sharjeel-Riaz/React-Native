@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     borderColor: "transparent",
     marginLeft: 8,
     marginRight: 8,
-    marginBottom: 5,
+    marginBottom: 8,
     elevation: 1,
   },
 });
