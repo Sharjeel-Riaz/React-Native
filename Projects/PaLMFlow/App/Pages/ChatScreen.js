@@ -41,11 +41,49 @@ export default function ChatScreen() {
   }, []);
 
   const getBardResp = (message) => {
-    GlobalApi.getBardApi(message).then((resp) => {
-      if (resp.data.resp[1].content) {
+    GlobalApi.getBardApi(message)
+      .then((resp) => {
+        if (resp.data.resp[1].content) {
+          const chatAPIResp = {
+            _id: Math.random() * (9999999 - 1),
+            text: resp.data.resp[1].content,
+            createdAt: new Date(),
+            user: {
+              _id: 2,
+              name: "React Native",
+              avatar: param.selectedFace?.image,
+            },
+          };
+          setMessages((previousMessages) =>
+            GiftedChat.append(previousMessages, chatAPIResp)
+          );
+          setLoading(false);
+        } else {
+          setLoading(false);
+          const errorMessage =
+            "Sorry, I can't help you with it. Please try again later!";
+          const chatAPIResp = {
+            _id: Math.random() * (9999999 - 1),
+            text: errorMessage,
+            createdAt: new Date(),
+            user: {
+              _id: 2,
+              name: "React Native",
+              avatar: param.selectedFace?.image,
+            },
+          };
+          setMessages((previousMessages) =>
+            GiftedChat.append(previousMessages, chatAPIResp)
+          );
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        const errorMessage =
+          "Sorry, an error occurred. Please try again later!";
         const chatAPIResp = {
           _id: Math.random() * (9999999 - 1),
-          text: resp.data.resp[1].content,
+          text: errorMessage,
           createdAt: new Date(),
           user: {
             _id: 2,
@@ -56,24 +94,7 @@ export default function ChatScreen() {
         setMessages((previousMessages) =>
           GiftedChat.append(previousMessages, chatAPIResp)
         );
-        setLoading(false);
-      } else {
-        setLoading(false);
-        const chatAPIResp = {
-          _id: Math.random() * (9999999 - 1),
-          text: "Sorry, I can't help you with it.",
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: "React Native",
-            avatar: param.selectedFace?.image,
-          },
-        };
-        setMessages((previousMessages) =>
-          GiftedChat.append(previousMessages, chatAPIResp)
-        );
-      }
-    });
+      });
   };
 
   // Custom Input Toolbar
