@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://192.168.100.69:3000/api/bardapi";
+const BASE_URL = process.env.EXPO_PUBLIC_API_END_POINT;
 
 const getBardApi = (userMessage) =>
   axios.get(BASE_URL + "?ques=" + userMessage);
