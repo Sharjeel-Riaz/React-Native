@@ -30,7 +30,7 @@ This section explains on how you can create your own local environment for
   repository, whatever feels good to you.
 - Now open the terminal at the directory where you have the project and run `npm
 install` to download all the necessary dependencies.
-- Now there are some specific environment varibales that you might need to fill
+- Now there are some specific environment variables that you might need to fill
   in order to run the project properly.
 - Set up a google cloud account if you have'nt already and create a new project.
 - Go to the dashboard of the project that you just created & open the `API &
