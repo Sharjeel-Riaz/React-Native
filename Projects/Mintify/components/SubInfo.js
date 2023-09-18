@@ -2,10 +2,27 @@ import { View, Text, Image } from "react-native";
 
 import { COLORS, SIZES, SHADOWS, assets, FONTS } from "../constants";
 
-export const NFTTitle = () => {
+export const NFTTitle = ({ title, subTitle, titleSize, subTitleSize }) => {
   return (
     <View>
-      <Text>Title</Text>
+      <Text
+        style={{
+          fontFamily: FONTS.semiBold,
+          fontSize: titleSize,
+          color: COLORS.primary,
+        }}
+      >
+        {title}
+      </Text>
+      <Text
+        style={{
+          fontFamily: FONTS.regular,
+          fontSize: subTitleSize,
+          color: COLORS.primary,
+        }}
+      >
+        {subTitle}
+      </Text>
     </View>
   );
 };
