@@ -7,7 +7,7 @@ const HomeHeader = ({ onSearch }) => {
     <View
       style={{
         backgroundColor: COLORS.primary,
-        padding: SIZES.padding,
+        padding: SIZES.small,
       }}
     >
       <View
@@ -22,8 +22,9 @@ const HomeHeader = ({ onSearch }) => {
           source={assets.logo}
           resizeMode="contain"
           style={{
-            width: 90,
-            height: 25,
+            width: 110,
+            height: 50,
+            marginLeft: -5,
           }}
         />
         <View
