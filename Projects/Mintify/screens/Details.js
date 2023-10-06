@@ -17,7 +17,39 @@ import {
   DetailsBid,
 } from "../components";
 
-const Details = ({ route, navigatioon }) => {
+const DetailsHeader = ({ data, navigation }) => {
+  return (
+    <View
+      style={{
+        width: "100%",
+        height: 400,
+      }}
+    >
+      <Image
+        source={data.image}
+        resizeMode="cover"
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
+      />
+
+      <CircleButton
+        imgURL={assets.left}
+        handlePress={() => navigation.goBack()}
+        left={15}
+        top={StatusBar.currentHeight + 12}
+      />
+      <CircleButton
+        imgURL={assets.heart}
+        right={15}
+        top={StatusBar.currentHeight + 12}
+      />
+    </View>
+  );
+};
+
+const Details = ({ route, navigation }) => {
   const { data } = route.params;
 
   return (
@@ -42,6 +74,23 @@ const Details = ({ route, navigatioon }) => {
       >
         <RectButton minWidth={170} fontSize={SIZES.large} {...SHADOWS.dark} />
       </View>
+
+      <FlatList
+        data={data.bids}
+        renderItem={({ item }) => <DetailsBid data={item} />}
+        keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: SIZES.extraLarge * 3 }}
+        ListHeaderComponent={() => (
+          <>
+            <DetailsHeader data={data} navigation={navigation} />
+            <SubInfo />
+            <View style={{ padding: SIZES.font }}>
+              <DetailsDesc data={data} />
+            </View>
+          </>
+        )}
+      />
     </SafeAreaView>
   );
 };
