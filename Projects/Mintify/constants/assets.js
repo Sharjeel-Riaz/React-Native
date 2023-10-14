@@ -18,6 +18,9 @@ import person02 from "../assets/images/person02.png";
 import person03 from "../assets/images/person03.png";
 import person04 from "../assets/images/person04.png";
 
+import background from "../assets/images/background.png";
+import nft from "../assets/images/nft.png";
+
 export default {
   badge,
   eth,
@@ -38,4 +41,7 @@ export default {
   person02,
   person03,
   person04,
+
+  background,
+  nft,
 };
