@@ -1,5 +1,9 @@
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import {
+  GoogleSocialButton,
+  FacebookSocialButton,
+} from "react-native-social-buttons";
 
 import { assets } from "../constants";
 
@@ -84,7 +88,7 @@ const Login = () => {
             alignItems: "center",
             marginRight: 16,
             marginLeft: 16,
-            marginTop: 16,
+            marginTop: 10,
           }}
         >
           <View
@@ -92,7 +96,7 @@ const Login = () => {
               backgroundColor: "rgb(236, 238, 235)",
               width: "100%",
               padding: 16,
-              marginTop: 30,
+              marginTop: -10,
               borderRadius: 16,
             }}
           >
@@ -158,6 +162,70 @@ const Login = () => {
                 SignUp
               </Text>
             </TouchableOpacity>
+          </View>
+
+          <View
+            style={{
+              flexDirection: "col",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 18,
+            }}
+          >
+            <Text>Or, Login with...</Text>
+            <View
+              style={{
+                flexDirection: "col",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: 5,
+              }}
+            >
+              <GoogleSocialButton
+                onPress={() => {}}
+                buttonViewStyle={{
+                  borderRadius: 8,
+                  elevation: 5,
+                  width: "80%",
+                  height: "auto",
+                  padding: 5,
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                  alignItems: "center",
+                  shadowColor: "#171717",
+                  shadowOpacity: 0.2,
+                  shadowRadius: 3,
+                }}
+                logoStyle
+                textStyle={{
+                  color: "black",
+                  fontSize: 18,
+                }}
+                buttonText="Continue with Google"
+              />
+              <FacebookSocialButton
+                onPress={() => {}}
+                buttonViewStyle={{
+                  borderRadius: 8,
+                  elevation: 5,
+                  width: "70",
+                  height: "auto",
+                  padding: 5,
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                  alignItems: "center",
+                  shadowColor: "#171717",
+                  shadowOpacity: 0.2,
+                  shadowRadius: 3,
+                }}
+                logoStyle
+                textStyle={{
+                  color: "white",
+                  fontSize: 18,
+                }}
+                buttonText="Continue with Facebook"
+              />
+            </View>
           </View>
         </View>
       </View>
