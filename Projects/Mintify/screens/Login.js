@@ -5,12 +5,7 @@ import {
   GoogleSocialButton,
   FacebookSocialButton,
 } from "react-native-social-buttons";
-import Animated, {
-  FadeIn,
-  FadeInDown,
-  FadeInUp,
-  FadeOut,
-} from "react-native-reanimated";
+import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 
 import { assets } from "../constants";
 
