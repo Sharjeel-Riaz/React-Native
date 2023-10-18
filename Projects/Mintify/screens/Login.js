@@ -1,13 +1,21 @@
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import {
   GoogleSocialButton,
   FacebookSocialButton,
 } from "react-native-social-buttons";
+import Animated, {
+  FadeIn,
+  FadeInDown,
+  FadeInUp,
+  FadeOut,
+} from "react-native-reanimated";
 
 import { assets } from "../constants";
 
 const Login = () => {
+  const navigation = useNavigation();
   return (
     <View
       style={{
@@ -34,7 +42,8 @@ const Login = () => {
           position: "absolute",
         }}
       >
-        <Image
+        <Animated.Image
+          entering={FadeInUp.delay(200).duration(1000).springify()}
           style={{
             width: 200,
             height: 300,
@@ -42,7 +51,8 @@ const Login = () => {
           }}
           source={assets.nft}
         />
-        <Image
+        <Animated.Image
+          entering={FadeInUp.delay(400).duration(1000).springify()}
           style={{
             width: 125,
             height: 225,
@@ -68,7 +78,8 @@ const Login = () => {
             alignItems: "center",
           }}
         >
-          <Text
+          <Animated.Text
+            entering={FadeInUp.duration(1000).springify()}
             style={{
               color: "white",
               fontWeight: "bold",
@@ -78,7 +89,7 @@ const Login = () => {
             }}
           >
             Login
-          </Text>
+          </Animated.Text>
         </View>
 
         {/* Login Form */}
@@ -91,18 +102,20 @@ const Login = () => {
             marginTop: 10,
           }}
         >
-          <View
+          <Animated.View
+            entering={FadeInDown.duration(1000).springify()}
             style={{
               backgroundColor: "rgb(236, 238, 235)",
               width: "100%",
               padding: 16,
-              marginTop: -10,
+              marginTop: -15,
               borderRadius: 16,
             }}
           >
             <TextInput placeholder="Email" placeholderTextColor={"gray"} />
-          </View>
-          <View
+          </Animated.View>
+          <Animated.View
+            entering={FadeInDown.delay(200).duration(1000).springify()}
             style={{
               backgroundColor: "rgb(236, 238, 235)",
               width: "100%",
@@ -116,9 +129,10 @@ const Login = () => {
               placeholderTextColor={"gray"}
               secureTextEntry
             />
-          </View>
+          </Animated.View>
 
-          <View
+          <Animated.View
+            entering={FadeInDown.delay(400).duration(1000).springify()}
             style={{
               width: "100%",
             }}
@@ -143,9 +157,10 @@ const Login = () => {
                 Login
               </Text>
             </TouchableOpacity>
-          </View>
+          </Animated.View>
 
-          <View
+          <Animated.View
+            entering={FadeInDown.delay(600).duration(1000).springify()}
             style={{
               flexDirection: "row",
               justifyContent: "center",
@@ -153,7 +168,7 @@ const Login = () => {
             }}
           >
             <Text>Don't have an account? </Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.push("Signup")}>
               <Text
                 style={{
                   color: "rgb(2 132 199)",
@@ -162,18 +177,25 @@ const Login = () => {
                 SignUp
               </Text>
             </TouchableOpacity>
-          </View>
+          </Animated.View>
 
           <View
             style={{
               flexDirection: "col",
               justifyContent: "center",
               alignItems: "center",
-              marginTop: 18,
+              marginTop: 20,
             }}
           >
-            <Text>Or, Login with...</Text>
-            <View
+            <Text
+              style={{
+                marginBottom: 10,
+              }}
+            >
+              OR
+            </Text>
+            <Animated.View
+              entering={FadeInDown.delay(800).duration(1000).springify()}
               style={{
                 flexDirection: "col",
                 justifyContent: "center",
@@ -225,7 +247,7 @@ const Login = () => {
                 }}
                 buttonText="Continue with Facebook"
               />
-            </View>
+            </Animated.View>
           </View>
         </View>
       </View>
