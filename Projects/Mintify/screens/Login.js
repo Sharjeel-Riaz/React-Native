@@ -140,6 +140,7 @@ const Login = () => {
                 borderRadius: 16,
                 marginTop: 16,
               }}
+              onPress={() => navigation.navigate("Home")}
             >
               <Text
                 style={{

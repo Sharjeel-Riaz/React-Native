@@ -20,6 +20,7 @@ import person04 from "../assets/images/person04.png";
 
 import background from "../assets/images/background.png";
 import nft from "../assets/images/nft.png";
+import exit from "../assets/icons/exit.png";
 
 export default {
   badge,
@@ -44,4 +45,5 @@ export default {
 
   background,
   nft,
+  exit,
 };

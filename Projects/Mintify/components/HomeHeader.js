@@ -1,8 +1,11 @@
-import { View, Text, Image, TextInput } from "react-native";
+import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { COLORS, FONTS, SIZES, assets } from "../constants";
 
 const HomeHeader = ({ onSearch }) => {
+  const navigation = useNavigation();
+
   return (
     <View
       style={{
@@ -76,6 +79,32 @@ const HomeHeader = ({ onSearch }) => {
         >
           Let's explore NFTs today!
         </Text>
+
+        <View
+          style={{
+            flexDirection: "row-reverse",
+            marginTop: -35,
+            marginBottom: 15,
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              flexDirection: "row-reverse",
+              width: 30,
+              height: 30,
+            }}
+            onPress={() => navigation.navigate("Login")}
+          >
+            <Image
+              source={assets.exit}
+              resizeMode="contain"
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
 
       <View
