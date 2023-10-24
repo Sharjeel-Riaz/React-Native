@@ -1,5 +1,8 @@
+import { useState, useEffect } from "react";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import * as Facebook from "expo-auth-session/providers/facebook";
+import * as WebBrowser from "expo-web-browser";
 import { StatusBar } from "expo-status-bar";
 import {
   GoogleSocialButton,
@@ -9,7 +12,36 @@ import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 
 import { assets } from "../constants";
 
+WebBrowser.maybeCompleteAuthSession();
+
 const Login = () => {
+  // Setting up facebook authentication
+  const [user, setUser] = useState(null);
+  const [request, response, promptAsync] = Facebook.useAuthRequest({
+    clientId: process.env.EXPO_PUBLIC_FACEBOOK_CLIENT_ID,
+  });
+
+  useEffect(() => {
+    if (response && response.type === "success" && response.authentication) {
+      (async () => {
+        const userInfoResponse = await fetch(
+          `https://graph.facebook.com/me?access_token=${response.authentication.accessToken}&fields=id,name,picture.type(large)`
+        );
+        const userInfo = await userInfoResponse.json();
+        setUser(userInfo);
+        console.log(JSON.stringify(response, null, 2));
+      })();
+    }
+  }, [response]);
+
+  const handlePressAsync = async () => {
+    const result = await promptAsync();
+    if (result.type !== "success") {
+      alert("Uh oh, something went wrong!");
+      return;
+    }
+  };
+
   const navigation = useNavigation();
   return (
     <View
@@ -222,7 +254,7 @@ const Login = () => {
                 buttonText="Continue with Google"
               />
               <FacebookSocialButton
-                onPress={() => {}}
+                onPress={handlePressAsync}
                 buttonViewStyle={{
                   borderRadius: 8,
                   elevation: 5,
