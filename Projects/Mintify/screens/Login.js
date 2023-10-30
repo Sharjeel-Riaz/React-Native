@@ -1,7 +1,11 @@
+// android client id: 180130561749-pto4ao4m7rrhaimt3c90ri0bmem102s1.apps.googleusercontent.com
+
 import { useState, useEffect } from "react";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as Facebook from "expo-auth-session/providers/facebook";
+import * as Google from "expo-auth-session/providers/google";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as WebBrowser from "expo-web-browser";
 import { StatusBar } from "expo-status-bar";
 import {
@@ -15,12 +19,19 @@ import { assets } from "../constants";
 WebBrowser.maybeCompleteAuthSession();
 
 const Login = () => {
+  // Setting up google authentication
+  const [userInfo, setUserInfo] = useState(null);
+  const [googleRequest, googleResponse, googlePromptAsync] =
+    Google.useAuthRequest({
+      androidClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
+      scopes: ["profile", "email"],
+    });
+
   // Setting up facebook authentication
   const [user, setUser] = useState(null);
   const [request, response, promptAsync] = Facebook.useAuthRequest({
     clientId: process.env.EXPO_PUBLIC_FACEBOOK_CLIENT_ID,
   });
-
   useEffect(() => {
     if (response && response.type === "success" && response.authentication) {
       (async () => {

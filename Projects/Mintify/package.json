@@ -27,7 +27,8 @@
     "expo-crypto": "~12.4.1",
     "expo-dev-client": "~2.4.11",
     "expo-web-browser": "~12.3.2",
-    "expo-splash-screen": "~0.20.5"
+    "expo-splash-screen": "~0.20.5",
+    "@react-native-async-storage/async-storage": "1.18.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
