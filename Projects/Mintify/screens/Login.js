@@ -1,5 +1,3 @@
-// android client id: 180130561749-pto4ao4m7rrhaimt3c90ri0bmem102s1.apps.googleusercontent.com
-
 import { useState, useEffect } from "react";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -24,7 +22,6 @@ const Login = () => {
   const [googleRequest, googleResponse, googlePromptAsync] =
     Google.useAuthRequest({
       androidClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
-      scopes: ["profile", "email"],
     });
 
   // Setting up facebook authentication
@@ -32,6 +29,7 @@ const Login = () => {
   const [request, response, promptAsync] = Facebook.useAuthRequest({
     clientId: process.env.EXPO_PUBLIC_FACEBOOK_CLIENT_ID,
   });
+
   useEffect(() => {
     if (response && response.type === "success" && response.authentication) {
       (async () => {
@@ -243,7 +241,7 @@ const Login = () => {
               }}
             >
               <GoogleSocialButton
-                onPress={() => {}}
+                onPress={() => googlePromptAsync()}
                 buttonViewStyle={{
                   borderRadius: 8,
                   elevation: 5,
