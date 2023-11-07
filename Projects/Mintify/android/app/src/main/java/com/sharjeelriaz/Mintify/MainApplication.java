@@ -1,4 +1,4 @@
-package com.sharjeelriaz.Mintify;
+package com.sharjeelriaz.mintify;
 
 import android.app.Application;
 import android.content.res.Configuration;

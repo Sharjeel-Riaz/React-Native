@@ -25,7 +25,8 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="com.sharjeelriaz.Mintify"/>
+        <data android:scheme="mintify"/>
+        <data android:scheme="com.sharjeelriaz.mintify"/>
         <data android:scheme="exp+mintify"/>
       </intent-filter>
     </activity>

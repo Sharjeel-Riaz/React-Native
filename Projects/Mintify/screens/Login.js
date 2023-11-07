@@ -18,38 +18,47 @@ WebBrowser.maybeCompleteAuthSession();
 
 const Login = () => {
   // Setting up google authentication
+  const [accessToken, setAccessToken] = useState("");
   const [userInfo, setUserInfo] = useState(null);
+
   const [googleRequest, googleResponse, googlePromptAsync] =
     Google.useAuthRequest({
       androidClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
     });
 
-  // Setting up facebook authentication
-  const [user, setUser] = useState(null);
-  const [request, response, promptAsync] = Facebook.useAuthRequest({
-    clientId: process.env.EXPO_PUBLIC_FACEBOOK_CLIENT_ID,
-  });
-
   useEffect(() => {
-    if (response && response.type === "success" && response.authentication) {
-      (async () => {
-        const userInfoResponse = await fetch(
-          `https://graph.facebook.com/me?access_token=${response.authentication.accessToken}&fields=id,name,picture.type(large)`
-        );
-        const userInfo = await userInfoResponse.json();
-        setUser(userInfo);
-        console.log(JSON.stringify(response, null, 2));
-      })();
+    if (googleResponse?.type == "success") {
+      setAccessToken(googleResponse.authentication.accessToken);
+      console.log(googleResponse.authentication.accessToken);
     }
-  }, [response]);
+  }, [googleResponse]);
 
-  const handlePressAsync = async () => {
-    const result = await promptAsync();
-    if (result.type !== "success") {
-      alert("Uh oh, something went wrong!");
-      return;
-    }
-  };
+  // Setting up facebook authentication
+  // const [user, setUser] = useState(null);
+  // const [request, response, promptAsync] = Facebook.useAuthRequest({
+  //   clientId: process.env.EXPO_PUBLIC_FACEBOOK_CLIENT_ID,
+  // });
+
+  // useEffect(() => {
+  //   if (response && response.type === "success" && response.authentication) {
+  //     (async () => {
+  //       const userInfoResponse = await fetch(
+  //         `https://graph.facebook.com/me?access_token=${response.authentication.accessToken}&fields=id,name,picture.type(large)`
+  //       );
+  //       const userInfo = await userInfoResponse.json();
+  //       setUser(userInfo);
+  //       console.log(JSON.stringify(response, null, 2));
+  //     })();
+  //   }
+  // }, [response]);
+
+  // const handlePressAsync = async () => {
+  //   const result = await promptAsync();
+  //   if (result.type !== "success") {
+  //     alert("Uh oh, something went wrong!");
+  //     return;
+  //   }
+  // };
 
   const navigation = useNavigation();
   return (
@@ -263,7 +272,7 @@ const Login = () => {
                 buttonText="Continue with Google"
               />
               <FacebookSocialButton
-                onPress={handlePressAsync}
+                onPress={""}
                 buttonViewStyle={{
                   borderRadius: 8,
                   elevation: 5,

@@ -81,9 +81,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.sharjeelriaz.Mintify'
+    namespace 'com.sharjeelriaz.mintify'
     defaultConfig {
-        applicationId 'com.sharjeelriaz.Mintify'
+        applicationId 'com.sharjeelriaz.mintify'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

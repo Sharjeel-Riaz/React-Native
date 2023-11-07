@@ -1,4 +1,4 @@
-package com.sharjeelriaz.Mintify;
+package com.sharjeelriaz.mintify;
 
 import android.os.Build;
 import android.os.Bundle;
