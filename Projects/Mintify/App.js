@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { AuthContext } from "./Context/AuthContext";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { useFonts } from "expo-font";
@@ -17,6 +19,24 @@ const theme = {
 };
 
 const App = () => {
+  const [userData, setUserData] = useState();
+  const [loading, setLoading] = useState(true); // Add a loading state
+
+  useEffect(() => {
+    // Simulate a user authentication process
+    setTimeout(() => {
+      const resp = {
+        /* your user data */
+      };
+      if (resp) {
+        setUserData(resp);
+      } else {
+        setUserData(null);
+      }
+      setLoading(false); // Set loading to false after fetching the data
+    }, 1000);
+  }, []);
+
   const [loaded] = useFonts({
     InterBold: require("./assets/fonts/Inter-Bold.ttf"),
     InterSemiBold: require("./assets/fonts/Inter-SemiBold.ttf"),
@@ -25,20 +45,22 @@ const App = () => {
     InterLight: require("./assets/fonts/Inter-Light.ttf"),
   });
 
-  if (!loaded) return null;
+  if (!loaded || loading) return null; // Don't render the app until the fonts and user data are loaded
 
   return (
-    <NavigationContainer theme={theme}>
-      <Stack.Navigator
-        screenOptions={{ headerShown: false }}
-        initialRouteName="Login"
-      >
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Details" component={Details} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AuthContext.Provider value={{ userData, setUserData }}>
+      <NavigationContainer theme={theme}>
+        <Stack.Navigator
+          screenOptions={{ headerShown: false }}
+          initialRouteName={userData ? "Home" : "Login"}
+        >
+          <Stack.Screen name="Signup" component={Signup} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Details" component={Details} />
+          <Stack.Screen name="Login" component={Login} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 };
 

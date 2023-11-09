@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as Facebook from "expo-auth-session/providers/facebook";
@@ -20,6 +21,7 @@ const Login = () => {
   // Setting up google authentication
   const [accessToken, setAccessToken] = useState("");
   const [userInfo, setUserInfo] = useState(null);
+  const { userData, setUserData } = useContext(AuthContext);
 
   const [googleRequest, googleResponse, googlePromptAsync] =
     Google.useAuthRequest({
@@ -29,7 +31,6 @@ const Login = () => {
   useEffect(() => {
     if (googleResponse?.type == "success") {
       setAccessToken(googleResponse.authentication.accessToken);
-      console.log(googleResponse.authentication.accessToken);
       getUserData();
     }
   }, [googleResponse]);
@@ -45,8 +46,8 @@ const Login = () => {
 
       const user = await resp.json();
       setUserInfo(user);
-      console.log("User Details: ", user);
-      // setUserData(user);
+      setUserData(user);
+      console.log("USER: ", user);
       // await Services.setUserAuth(user); // Storing the data in local storage
     } catch (error) {
       console.log("ERROR: ", error);
