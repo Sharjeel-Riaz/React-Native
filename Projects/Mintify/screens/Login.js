@@ -30,8 +30,28 @@ const Login = () => {
     if (googleResponse?.type == "success") {
       setAccessToken(googleResponse.authentication.accessToken);
       console.log(googleResponse.authentication.accessToken);
+      getUserData();
     }
   }, [googleResponse]);
+
+  // To get user data
+  const getUserData = async () => {
+    try {
+      const resp = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+        headers: {
+          Authorization: `Bearer ${googleResponse.authentication.accessToken}`,
+        },
+      });
+
+      const user = await resp.json();
+      setUserInfo(user);
+      console.log("User Details: ", user);
+      // setUserData(user);
+      // await Services.setUserAuth(user); // Storing the data in local storage
+    } catch (error) {
+      console.log("ERROR: ", error);
+    }
+  };
 
   // Setting up facebook authentication
   // const [user, setUser] = useState(null);
