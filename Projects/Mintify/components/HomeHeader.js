@@ -1,19 +1,15 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/AuthContext";
 import Services from "../shared/Services";
 import { COLORS, FONTS, SIZES, assets } from "../constants";
 
 const HomeHeader = ({ onSearch }) => {
-  const navigation = useNavigation();
-
   const { userData, setUserData } = useContext(AuthContext);
 
   const handleLogout = async () => {
     Services.logout(); // Call the logout function from Services
     setUserData(null); // Set user data to null
-    navigation.navigate("Login"); // Navigate to the login screen
   };
 
   return (

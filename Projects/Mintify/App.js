@@ -24,7 +24,6 @@ const App = () => {
 
   useEffect(() => {
     Services.getUserAuth().then((resp) => {
-      console.log("RESPONSE: ", resp);
       if (resp) {
         setUserData(resp);
       } else {
@@ -41,19 +40,23 @@ const App = () => {
     InterLight: require("./assets/fonts/Inter-Light.ttf"),
   });
 
-  if (!loaded) return null; // Don't render the app until the fonts and user data are loaded
+  if (!loaded) return null; // Don't render the app until the fonts are loaded
 
   return (
     <AuthContext.Provider value={{ userData, setUserData }}>
       <NavigationContainer theme={theme}>
-        <Stack.Navigator
-          screenOptions={{ headerShown: false }}
-          initialRouteName={userData ? "Home" : "Login"}
-        >
-          <Stack.Screen name="Signup" component={Signup} />
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Details" component={Details} />
-          <Stack.Screen name="Login" component={Login} />
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {userData ? (
+            <>
+              <Stack.Screen name="Home" component={Home} />
+              <Stack.Screen name="Details" component={Details} />
+            </>
+          ) : (
+            <>
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="Signup" component={Signup} />
+            </>
+          )}
         </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>

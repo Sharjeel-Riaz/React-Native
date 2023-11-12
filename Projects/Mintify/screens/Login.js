@@ -48,7 +48,6 @@ const Login = () => {
       setUserInfo(user);
       setUserData(user);
       await Services.setUserAuth(user);
-      console.log("USER: ", user);
     } catch (error) {
       console.log("ERROR: ", error);
     }
@@ -211,7 +210,7 @@ const Login = () => {
                 borderRadius: 16,
                 marginTop: 16,
               }}
-              onPress={() => navigation.navigate("Home")}
+              onPress={() => console.log("Login Pressed")}
             >
               <Text
                 style={{
