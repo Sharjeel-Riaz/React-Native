@@ -1,10 +1,9 @@
 import { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../Context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as Facebook from "expo-auth-session/providers/facebook";
 import * as Google from "expo-auth-session/providers/google";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as WebBrowser from "expo-web-browser";
 import { StatusBar } from "expo-status-bar";
 import {
@@ -13,6 +12,7 @@ import {
 } from "react-native-social-buttons";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
 
+import Services from "../shared/Services";
 import { assets } from "../constants";
 
 WebBrowser.maybeCompleteAuthSession();
@@ -47,8 +47,8 @@ const Login = () => {
       const user = await resp.json();
       setUserInfo(user);
       setUserData(user);
+      await Services.setUserAuth(user);
       console.log("USER: ", user);
-      // await Services.setUserAuth(user); // Storing the data in local storage
     } catch (error) {
       console.log("ERROR: ", error);
     }

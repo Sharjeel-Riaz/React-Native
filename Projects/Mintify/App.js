@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AuthContext } from "./Context/AuthContext";
+import { AuthContext } from "./context/AuthContext";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { useFonts } from "expo-font";
@@ -7,6 +7,7 @@ import Home from "./screens/Home";
 import Details from "./screens/Details";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
+import Services from "./shared/Services";
 
 const Stack = createStackNavigator();
 
@@ -20,21 +21,16 @@ const theme = {
 
 const App = () => {
   const [userData, setUserData] = useState();
-  const [loading, setLoading] = useState(true); // Add a loading state
 
   useEffect(() => {
-    // Simulate a user authentication process
-    setTimeout(() => {
-      const resp = {
-        /* your user data */
-      };
+    Services.getUserAuth().then((resp) => {
+      console.log("RESPONSE: ", resp);
       if (resp) {
         setUserData(resp);
       } else {
         setUserData(null);
       }
-      setLoading(false); // Set loading to false after fetching the data
-    }, 1000);
+    });
   }, []);
 
   const [loaded] = useFonts({
@@ -45,7 +41,7 @@ const App = () => {
     InterLight: require("./assets/fonts/Inter-Light.ttf"),
   });
 
-  if (!loaded || loading) return null; // Don't render the app until the fonts and user data are loaded
+  if (!loaded) return null; // Don't render the app until the fonts and user data are loaded
 
   return (
     <AuthContext.Provider value={{ userData, setUserData }}>
