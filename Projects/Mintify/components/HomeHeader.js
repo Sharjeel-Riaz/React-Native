@@ -47,9 +47,12 @@ const HomeHeader = ({ onSearch }) => {
           }}
         >
           <Image
-            source={assets.person03}
+            source={
+              userData?.picture ? { uri: userData.picture } : assets.person04
+            }
             resizeMode="contain"
             style={{
+              borderRadius: 100,
               width: "100%",
               height: "100%",
             }}
@@ -77,7 +80,7 @@ const HomeHeader = ({ onSearch }) => {
             color: COLORS.white,
           }}
         >
-          Hello, Victoria 👋🏻
+          Hello, {userData?.given_name || "User"} 👋🏻
         </Text>
         <Text
           style={{
