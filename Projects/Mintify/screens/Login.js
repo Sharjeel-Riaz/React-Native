@@ -54,31 +54,33 @@ const Login = () => {
   };
 
   // Setting up facebook authentication
-  // const [user, setUser] = useState(null);
-  // const [request, response, promptAsync] = Facebook.useAuthRequest({
-  //   clientId: process.env.EXPO_PUBLIC_FACEBOOK_CLIENT_ID,
-  // });
+  const [user, setUser] = useState(null);
+  const [request, response, promptAsync] = Facebook.useAuthRequest({
+    clientId: process.env.EXPO_PUBLIC_FACEBOOK_CLIENT_ID,
+  });
 
-  // useEffect(() => {
-  //   if (response && response.type === "success" && response.authentication) {
-  //     (async () => {
-  //       const userInfoResponse = await fetch(
-  //         `https://graph.facebook.com/me?access_token=${response.authentication.accessToken}&fields=id,name,picture.type(large)`
-  //       );
-  //       const userInfo = await userInfoResponse.json();
-  //       setUser(userInfo);
-  //       console.log(JSON.stringify(response, null, 2));
-  //     })();
-  //   }
-  // }, [response]);
+  useEffect(() => {
+    if (response && response.type === "success" && response.authentication) {
+      (async () => {
+        const userInfoResponse = await fetch(
+          `https://graph.facebook.com/me?access_token=${response.authentication.accessToken}&fields=id,name,picture.type(large)`
+        );
+        const userInfo = await userInfoResponse.json();
+        setUser(userInfo);
+        // setUserData(user);
+        // await Services.setUserAuth(user);
+        console.log(JSON.stringify(response, null, 2));
+      })();
+    }
+  }, [response]);
 
-  // const handlePressAsync = async () => {
-  //   const result = await promptAsync();
-  //   if (result.type !== "success") {
-  //     alert("Uh oh, something went wrong!");
-  //     return;
-  //   }
-  // };
+  const handlePressAsync = async () => {
+    const result = await promptAsync();
+    if (result.type !== "success") {
+      alert("Uh oh, something went wrong!");
+      return;
+    }
+  };
 
   const navigation = useNavigation();
   return (
