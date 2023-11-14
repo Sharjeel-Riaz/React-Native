@@ -74,7 +74,7 @@ const Login = () => {
     }
   }, [response]);
 
-  const handlePressAsync = async () => {
+  const facebookPromptAsync = async () => {
     const result = await promptAsync();
     if (result.type !== "success") {
       alert("Uh oh, something went wrong!");
@@ -294,7 +294,7 @@ const Login = () => {
                 buttonText="Continue with Google"
               />
               <FacebookSocialButton
-                onPress={""}
+                onPress={() => facebookPromptAsync()}
                 buttonViewStyle={{
                   borderRadius: 8,
                   elevation: 5,
