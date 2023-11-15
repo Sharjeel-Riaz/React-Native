@@ -294,7 +294,7 @@ const Login = () => {
                 buttonText="Continue with Google"
               />
               <FacebookSocialButton
-                onPress={() => facebookPromptAsync()}
+                onPress={() => console.log("Facebook button pressed")}
                 buttonViewStyle={{
                   borderRadius: 8,
                   elevation: 5,
