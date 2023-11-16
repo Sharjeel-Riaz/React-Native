@@ -19,39 +19,39 @@ WebBrowser.maybeCompleteAuthSession();
 
 const Login = () => {
   // Setting up google authentication
-  const [accessToken, setAccessToken] = useState("");
-  const [userInfo, setUserInfo] = useState(null);
-  const { userData, setUserData } = useContext(AuthContext);
+  // const [accessToken, setAccessToken] = useState("");
+  // const [userInfo, setUserInfo] = useState(null);
+  // const { userData, setUserData } = useContext(AuthContext);
 
-  const [googleRequest, googleResponse, googlePromptAsync] =
-    Google.useAuthRequest({
-      androidClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
-    });
+  // const [googleRequest, googleResponse, googlePromptAsync] =
+  //   Google.useAuthRequest({
+  //     androidClientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID,
+  //   });
 
-  useEffect(() => {
-    if (googleResponse?.type == "success") {
-      setAccessToken(googleResponse.authentication.accessToken);
-      getUserData();
-    }
-  }, [googleResponse]);
+  // useEffect(() => {
+  //   if (googleResponse?.type == "success") {
+  //     setAccessToken(googleResponse.authentication.accessToken);
+  //     getUserData();
+  //   }
+  // }, [googleResponse]);
 
-  // To get user data
-  const getUserData = async () => {
-    try {
-      const resp = await fetch("https://www.googleapis.com/userinfo/v2/me", {
-        headers: {
-          Authorization: `Bearer ${googleResponse.authentication.accessToken}`,
-        },
-      });
+  // // To get user data
+  // const getUserData = async () => {
+  //   try {
+  //     const resp = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+  //       headers: {
+  //         Authorization: `Bearer ${googleResponse.authentication.accessToken}`,
+  //       },
+  //     });
 
-      const user = await resp.json();
-      setUserInfo(user);
-      setUserData(user);
-      await Services.setUserAuth(user);
-    } catch (error) {
-      console.log("ERROR: ", error);
-    }
-  };
+  //     const user = await resp.json();
+  //     setUserInfo(user);
+  //     setUserData(user);
+  //     await Services.setUserAuth(user);
+  //   } catch (error) {
+  //     console.log("ERROR: ", error);
+  //   }
+  // };
 
   // Setting up facebook authentication
   const [user, setUser] = useState(null);
@@ -77,6 +77,7 @@ const Login = () => {
   const facebookPromptAsync = async () => {
     const result = await promptAsync();
     if (result.type !== "success") {
+      console.log(result);
       alert("Uh oh, something went wrong!");
       return;
     }
@@ -294,7 +295,7 @@ const Login = () => {
                 buttonText="Continue with Google"
               />
               <FacebookSocialButton
-                onPress={() => console.log("Facebook button pressed")}
+                onPress={facebookPromptAsync}
                 buttonViewStyle={{
                   borderRadius: 8,
                   elevation: 5,
