@@ -18,7 +18,7 @@ import { assets } from "../constants";
 WebBrowser.maybeCompleteAuthSession();
 
 const Login = () => {
-  Setting up google authentication
+  // Setting up google authentication
   const [accessToken, setAccessToken] = useState("");
   const [userInfo, setUserInfo] = useState(null);
   const { userData, setUserData } = useContext(AuthContext);
