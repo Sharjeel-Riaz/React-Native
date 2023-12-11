@@ -67,9 +67,10 @@ const Login = () => {
         );
         const userInfo = await userInfoResponse.json();
         setUser(userInfo);
-        // setUserData(user);
+        setUserData(user);
         // await Services.setUserAuth(user);
         console.log(JSON.stringify(response, null, 2));
+        console.log(user);
       })();
     }
   }, [response]);
