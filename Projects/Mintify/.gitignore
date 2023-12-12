@@ -34,6 +34,8 @@ yarn-error.*
 
 # config files
 .json
+app.json
+*.json
 
 # typescript
 *.tsbuildinfo
