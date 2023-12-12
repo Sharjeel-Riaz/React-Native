@@ -28,6 +28,7 @@
         <data android:scheme="mintify"/>
         <data android:scheme="com.sharjeelriaz.mintify"/>
         <data android:scheme="exp+mintify"/>
+        <data android:scheme="fb301300432839036"/>
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false"/>

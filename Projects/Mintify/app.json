@@ -25,6 +25,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "scheme": ["mintify${env:EXPO_PUBLIC_FACEBOOK_CLIENT_ID}"]
+    "scheme": "fb301300432839036"
   }
 }
+
