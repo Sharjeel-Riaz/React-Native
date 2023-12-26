@@ -48,6 +48,8 @@ const Login = () => {
       setUserInfo(user);
       setUserData(user);
       await Services.setUserAuth(user);
+      // To check your stored response
+      console.log(user);
     } catch (error) {
       console.log("ERROR: ", error);
     }
@@ -67,10 +69,11 @@ const Login = () => {
         );
         const userInfo = await userInfoResponse.json();
         setUser(userInfo);
-        setUserData(user);
-        // await Services.setUserAuth(user);
+        setUserData(userInfo);
+        await Services.setUserAuth(userInfo);
+        // To check your stored response
         console.log(JSON.stringify(response, null, 2));
-        console.log(user);
+        console.log(userInfo);
       })();
     }
   }, [response]);

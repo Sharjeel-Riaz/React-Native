@@ -44,7 +44,10 @@ const HomeHeader = ({ onSearch }) => {
         >
           <Image
             source={
-              userData?.picture ? { uri: userData.picture } : assets.person04
+              userData &&
+              (userData?.picture
+                ? { uri: userData.picture }
+                : { uri: userData.picture.data.url })
             }
             resizeMode="contain"
             style={{
@@ -76,7 +79,7 @@ const HomeHeader = ({ onSearch }) => {
             color: COLORS.white,
           }}
         >
-          Hello, {userData?.given_name || "User"} 👋🏻
+          Hello, {userData?.given_name || userData?.name || "User"} 👋🏻
         </Text>
         <Text
           style={{
