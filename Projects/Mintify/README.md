@@ -3,7 +3,7 @@
 Mintify, developed with precision using [React
 Native](https://reactnative.dev/) with [Expo](https://expo.dev/) and adorned with sophisticated [Tailwind CSS](https://tailwindcss.com/) styling, introduces a secure NFT marketplace. Authenticated through esteemed platforms such as [Google](https://developers.google.com/) and [Meta](https://developers.facebook.com/), Mintify offers a minimalist UI for seamless minting and trading.
 
-![Banner]()
+![Banner](https://raw.githubusercontent.com/Sharjeel-Riaz/React-Native/main/Projects/Mintify/assets/Mintify%20Banner.png)
 
 ## Features
 
