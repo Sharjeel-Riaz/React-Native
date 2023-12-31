@@ -101,3 +101,7 @@ EXPO_PUBLIC_FACEBOOK_CLIENT_ID = "Your OAuth Facebook App ID key with double quo
   there might be something wrong with you setting up your environment.
 
 - Feel free to use it or make any necessary modifications `:D`
+
+## Showcase
+
+- Visit the live environment of Mintify Showcase at: [Mintify-Showcase](https://mintify-showcase.vercel.app/)
